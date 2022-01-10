@@ -1,0 +1,100 @@
+<?php
+include_once 'Socket.php';
+
+$server = new Swoole\Server("0.0.0.0", 2345);
+$socket=new Socket();
+$server->on('connect', function ($server, $fd){
+    echo "connection open: {$fd}\n";
+});
+
+$server->on('receive', function ($server, $fd, $reactor_id, $data) {
+    $arr=explode(',',$data);
+    choose($arr,$fd);
+    //$server->send($data, "Swoole: {$arr}");
+
+});
+$server->on('close', function ($server, $fd) {
+    echo "connection close: {$fd}\n";
+});
+
+$server->start();
+
+
+function choose($data,$fd)
+{
+    global $socket;
+    global $server;
+    bind_user("2",$fd);
+    $fdd=get_fd_user(2);
+    echo "fdd:$fdd"."\n";
+    $server->send($fd,"recive OK");
+    $car=$socket->update_position($data);
+    send_admin($car);
+}
+
+/**绑定uid
+ * @param $uid
+ * @param $fd
+ */
+function bind_user($uid,$fd)
+{
+    global $server;
+    $info=$server->getClientInfo($fd);
+    if(!isset($info['uid'])){
+        $server->bind($fd,$uid);
+        $server->send($fd,"bind OK");
+    }
+}
+
+/**
+ * 发送到管理员
+ */
+function send_admin($data)
+{
+    $str="car,";
+    foreach ($data as $k=>$v){
+        $str.=$v.",";
+    }
+    set_time_limit(0);
+
+    $host = "127.0.0.1";
+    $port = 2346;
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)or die("Could not create  socket\n");
+
+    $connection = socket_connect($socket, $host, $port) or die("Could not connet server\n");
+    socket_write($socket, $str);
+    socket_close($socket);
+}
+
+
+function get_fd_user($uid)
+{
+    $start_fd = 0;
+    while(true)
+    {
+        $conn_list = $this->server->getClientList($start_fd, 10);
+        if ($conn_list===false or count($conn_list) === 0)
+        {
+            echo "finish\n";
+            break;
+        }
+        $start_fd = end($conn_list);
+
+        foreach($conn_list as $fd)
+        {
+            $user=$this->server->getClientInfo($fd);
+            if($user['uid']==$uid){
+                //$this->server->push($fd, 'talk');
+                return $fd;
+
+                // break;
+            }else {
+                // code...
+            }
+        }
+    }
+
+}
+
+
+

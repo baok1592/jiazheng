@@ -1,0 +1,43 @@
+<?php
+include_once "mysql.php";
+include_once 'Common.php';
+
+class Socket
+{
+    /**
+     *更新车辆信息
+     */
+    private $connect;
+    private $common;
+    public function __construct()
+    {
+        $this->connect=(new mysql());
+        $this->common=new Common();
+    }
+
+    public function update_position($data)
+    {
+         $dt=[
+             'equip_num'=>$data[0],
+             'position'=>$data[1].",".$data[2]
+         ];
+         $sql="update ys_car set position='{$dt['position']}' WHERE equip_num='{$data[0]}'";
+         $this->connect->query($sql);
+         $sql="select *from ys_car WHERE equip_num='{$data[0]}'";
+         $res=$this->connect->select($sql);
+
+         if(count($res)>0){
+             echo "enter1";
+             $reg=(new Common())->curl_post('server/upload_ly',$dt);
+             echo $reg."\n";
+             return $res[0];
+         }
+
+         else
+             return null;
+    }
+
+
+
+}
+

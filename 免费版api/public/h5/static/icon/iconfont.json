@@ -1,0 +1,212 @@
+{
+  "id": "2130874",
+  "name": "yongshunwuliu",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "永顺物流",
+  "glyphs": [
+    {
+      "icon_id": "4924419",
+      "name": "删 除",
+      "font_class": "shanchu1",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "13691947",
+      "name": "编 辑",
+      "font_class": "bianji-copy",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "14498748",
+      "name": "删 除",
+      "font_class": "shanchu2",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "17569066",
+      "name": "编 辑",
+      "font_class": "bianji",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "2598474",
+      "name": "删  除",
+      "font_class": "shanchu",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "11070074",
+      "name": "上传图片 (2)",
+      "font_class": "shangchuantupian",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "11714596",
+      "name": "上传图片",
+      "font_class": "tubiaozhizuomoban-",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "12639005",
+      "name": "上传图片",
+      "font_class": "shangchuantupian1",
+      "unicode": "e6d9",
+      "unicode_decimal": 59097
+    },
+    {
+      "icon_id": "3427141",
+      "name": "加油",
+      "font_class": "gas-station",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "4944220",
+      "name": "收入",
+      "font_class": "shouru",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "8441627",
+      "name": "收入",
+      "font_class": "xinlingshouyewuicon-",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "1425355",
+      "name": "卖家",
+      "font_class": "iconfontzhizuobiaozhunBduan-",
+      "unicode": "e6fd",
+      "unicode_decimal": 59133
+    },
+    {
+      "icon_id": "3176766",
+      "name": "买家",
+      "font_class": "mai",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "8625460",
+      "name": "卖家",
+      "font_class": "maijia",
+      "unicode": "eccc",
+      "unicode_decimal": 60620
+    },
+    {
+      "icon_id": "8981618",
+      "name": "买家",
+      "font_class": "maijia1",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "8981619",
+      "name": "卖家",
+      "font_class": "maijia2",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "9571323",
+      "name": "停车场 (1)",
+      "font_class": "tingchechang",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "12556729",
+      "name": "车队",
+      "font_class": "chedui",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "14513699",
+      "name": "停车场 (1)",
+      "font_class": "tingchechang1",
+      "unicode": "e68d",
+      "unicode_decimal": 59021
+    },
+    {
+      "icon_id": "15144259",
+      "name": "停车场库-车场管理",
+      "font_class": "chechangguanli",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "13104892",
+      "name": "账户设置",
+      "font_class": "shezhi",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "9691487",
+      "name": "首页-选中",
+      "font_class": "icon_home",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "10910632",
+      "name": "右三角 向右 面性",
+      "font_class": "yousanjiaoxiangyoumianxing",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "13864078",
+      "name": "我 的",
+      "font_class": "wodedangxuan",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "10345800",
+      "name": "叉叉 (1)",
+      "font_class": "chacha",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "12303969",
+      "name": "眼睛",
+      "font_class": "yanjing",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "9479407",
+      "name": "账号",
+      "font_class": "zhanghao",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "12380243",
+      "name": "眼睛 可见-2",
+      "font_class": "yanjingkejian-",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "16346855",
+      "name": "密 码",
+      "font_class": "mima",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+<?php
+declare (strict_types = 1);
+
+namespace app\model;
+
+use app\controller\common\Common;
+use app\service\TokenService;
+use ruhua\bases\BaseModel;
+use ruhua\exceptions\BaseException;
+use think\facade\Log;
+
+
+class Driver extends BaseModel
+{
+    public static function login($data)
+    {
+        Log::error($data);
+        $list=self::where('mobile',$data['mobile'])->find();
+        if(!$list){
+            throw new BaseException(['msg'=>'非司机号码']);
+        }
+        $check=Common::checkCode($data['mobile'],$data['code']);
+        if($check){
+            $chache=[
+                'drive_id'=>$list['id'],
+                'group'=>'drive'
+            ];
+            $res=(new TokenService())->saveCache($chache);
+            return $res;
+        }else{
+            return null;
+        }
+    }
+
+    /**头像
+     * @return \think\model\relation\BelongsTo
+     */
+    public function head()
+    {
+        return $this->belongsTo('Imgs','headpic','id');
+    }
+
+    /**获取车队
+     * @return \think\model\relation\BelongsTo
+     */
+    public function fleets()
+    {
+        return $this->belongsTo('Fleet','fleet','id');
+    }
+
+    public function car()
+    {
+        return $this->hasMany('Car','uid','id');
+    }
+}

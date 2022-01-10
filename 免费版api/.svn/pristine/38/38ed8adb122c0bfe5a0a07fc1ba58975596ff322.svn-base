@@ -1,0 +1,22 @@
+<?php
+declare (strict_types = 1);
+
+namespace app\model;
+
+use ruhua\bases\BaseModel;
+
+
+class Car extends BaseModel
+{
+    public function user()
+    {
+        return $this->belongsTo('Driver','uid','id');
+    }
+
+    public function getStateAttr($value)
+    {
+        $data=['空闲中','配送中','返回中'];
+        return $data[$value];
+    }
+
+}

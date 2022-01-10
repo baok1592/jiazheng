@@ -1,0 +1,68 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/29 0029
+ * Time: 11:23
+ */
+
+namespace app\controller\admin;
+
+
+use app\controller\common\Common;
+use app\service\TokenService;
+use ruhua\bases\BaseController;
+use app\model\Admin as AdminModel;
+
+class Admin extends BaseController
+{
+    /**
+     * 管理员登录
+     */
+    public function login()
+    {
+        $post=input('post.');
+        $res=AdminModel::login($post);
+        return app('json')->go($res);
+    }
+
+    /**绑定电话号码
+     * @param $mobile
+     * @param $code
+     */
+    public function bind_mobile($mobile,$code)
+    {
+        $res=Common::checkCode($mobile,$code);
+        $aid=1;
+        $res=AdminModel::where('id',$aid)->update(['mobile'=>$mobile]);
+        return app('json')->go($res);
+    }
+
+    /**
+     * 管理员手机验证登录
+     */
+    public function mobile_login()
+    {
+        $post=input('post.');
+        $res=AdminModel::mobile_login($post);
+        return app('json')->go($res);
+    }
+
+    /**
+     * 管理员修改个人信息
+     */
+    public function update_infor()
+    {
+        $data=input('post.');
+        $uid=1;
+        $res=AdminModel::update($data,['id'=>$uid]);
+        return app('json')->go($res);
+    }
+
+    public function get_infor()
+    {
+        $uid=1;
+        $res=AdminModel::where('id',$uid)->withoutField('password,group_id,ip')->find();
+        return app('json')->go($res);
+    }
+}

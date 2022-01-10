@@ -1,0 +1,21 @@
+<?php
+
+$server = new Swoole\Server("0.0.0.0", 2346);
+
+$server->on('connect', function ($server, $fd){
+    echo "connection open: {$fd}\n";
+});
+
+$server->on('receive', function ($server, $fd, $reactor_id, $data) {
+    echo "receive OK************************************************";
+    echo $data."\n";
+  //  $arr=explode(',',$data);
+    //choose($arr);
+    //$server->send($data, "Swoole: {$arr}");
+
+});
+$server->on('close', function ($server, $fd) {
+    echo "connection close: {$fd}\n";
+});
+
+$server->start();

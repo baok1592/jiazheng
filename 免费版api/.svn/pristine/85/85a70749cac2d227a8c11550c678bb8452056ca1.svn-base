@@ -1,0 +1,53 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/9/8 0008
+ * Time: 14:52
+ */
+
+namespace app\controller\business;
+
+
+use ruhua\bases\BaseController;
+use app\controller\common\Common;
+use app\model\Plan as PlanModel;
+use app\controller\common\Wl;
+
+class Order extends BaseController
+{
+    /**
+     * 申请购置计划
+     */
+    public function add_order()
+    {
+        $uid=4;
+        $data=input('post.');
+        $rule=[
+            'name'=>'require',
+            'username'=>'require',
+            'mobile'=>'require',
+            'weight'=>'require',
+            'start'=>'require',
+            'end'=>'require'
+        ];
+        $this->validate($data,$rule);
+        $data['order_num']=(new Common())->makeOrderNum();
+        $data['bid']=$uid;
+        $res=PlanModel::create($data);
+        Wl::add_order_temp($res['id']);
+        return app('json')->go($res);
+    }
+
+    /**商家获取订单
+     * @return mixed
+     */
+    public function get_order()
+    {
+        $uid=4;
+        $list=PlanModel::with(['wl','car','driver'])->where(['bid'=>$uid])->order('update_time desc')->select();
+        return app('json')->go($list);
+
+    }
+
+}

@@ -1,0 +1,88 @@
+<?php
+include_once 'mysql.php';
+
+$server = new Swoole\Server("0.0.0.0", 2346);
+
+$server->on('connect', function ($server, $fd){
+    echo "connection open: {$fd}\n";
+});
+
+$server->on('receive', function ($server, $fd, $reactor_id, $data) {
+    $list=explode(',',$data);
+    if($list[0]='car'){
+        send_admin($data);
+    }
+    if($list[0]='admin'){
+        bind_admin($list,$fd);
+    }
+});
+$server->on('close', function ($server, $fd) {
+    echo "connection close: {$fd}\n";
+});
+
+$server->start();
+
+/**
+ * 管理员绑定
+ */
+function bind_admin($data,$fd)
+{
+    global $server;
+    /**
+     * data=['类型','电话','token']
+     */
+    $info=$server->getClientInfo($fd);
+    if(!isset($info['uid'])){
+        $res=(new mysql())->select("select *from ys_admin WHERE mobile='{$data[1]}' and code= {$data[2]}");
+        if($res){
+            $server->bind($fd,0);
+            $server->send($fd,"bind OK");
+        }
+
+    }
+}
+
+/**
+ * 发送数据到管理员端
+ */
+function send_admin($data)
+{
+    global $server;
+    print_r($data);
+    $admin_fd=get_fd_user(0);
+    $server->send($admin_fd,$data);
+
+
+}
+
+
+function get_fd_user($uid)
+{
+    $start_fd = 0;
+    global $server;
+    while(true)
+    {
+        $conn_list = $server->getClientList($start_fd, 100);
+        if ($conn_list===false or count($conn_list) === 0)
+        {
+            echo "finish\n";
+            break;
+        }
+        $start_fd = end($conn_list);
+
+        foreach($conn_list as $fd)
+        {
+            $user=$server->getClientInfo($fd);
+            if($user['uid']==$uid){
+                //$this->server->push($fd, 'talk');
+                return $fd;
+
+                // break;
+            }else {
+                // code...
+            }
+        }
+    }
+
+}
+

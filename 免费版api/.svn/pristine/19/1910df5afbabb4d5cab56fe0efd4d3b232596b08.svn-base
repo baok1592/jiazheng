@@ -1,0 +1,108 @@
+<?php
+include_once 'Socket.php';
+include_once 'mysql.php';
+
+$server = new Swoole\Server("0.0.0.0", 2345);
+$socket=new Socket();
+$server->on('connect', function ($server, $fd){
+    echo "connection open: {$fd}\n";
+});
+
+$server->on('receive', function ($server, $fd, $reactor_id, $data) {
+    $arr=explode(',',$data);
+    echo $data."\n";
+   // choose($arr,$fd);
+    $server->send($fd, "Swoole: OKOK");
+
+});
+$server->on('close', function ($server, $fd) {
+    echo "connection close: {$fd}\n";
+});
+
+$server->start();
+
+
+function choose($data,$fd)
+{
+    global $socket;
+    global $server;
+    bind_user($data,$fd);
+    $server->send($fd,"recive OK");
+    $car=$socket->update_position($data);
+    $dt[0]='car';
+    $dt[1]=$car['id'];
+    $dt[2]=$data[1];
+    $dt[3]=$data[2];
+    //$dt[4]=$car['car_num'];
+    send_admin($dt);
+}
+
+/**绑定uid
+ * @param $uid
+ * @param $fd
+ */
+function bind_user($data,$fd)
+{
+    global $server;
+
+
+    $info=$server->getClientInfo($fd);
+    if(!isset($info['uid'])){
+        $res=(new mysql())->select("select *from ys_car WHERE equip_num='{$data[0]}'");
+        $server->bind($fd,$res[0]['id']);
+        $server->send($fd,"bind OK");
+    }
+}
+
+/**
+ * 发送到管理员
+ */
+function send_admin($data)
+{
+    $str='';
+    foreach ($data as $k=>$v){
+        $str.=$v.",";
+    }
+    set_time_limit(0);
+
+    $host = "127.0.0.1";
+    $port = 2346;
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)or die("Could not create  socket\n");
+
+    $connection = socket_connect($socket, $host, $port) or die("Could not connet server\n");
+    socket_write($socket, $str);
+    socket_close($socket);
+}
+
+
+function get_fd_user($uid)
+{
+    $start_fd = 0;
+    global $server;
+    while(true)
+    {
+        $conn_list = $server->getClientList($start_fd, 100);
+        if ($conn_list===false or count($conn_list) === 0)
+        {
+            break;
+        }
+        $start_fd = end($conn_list);
+
+        foreach($conn_list as $fd)
+        {
+            $user=$server->getClientInfo($fd);
+            if($user['uid']==$uid){
+                //$this->server->push($fd, 'talk');
+                return $fd;
+
+                // break;
+            }else {
+                // code...
+            }
+        }
+    }
+
+}
+
+
+

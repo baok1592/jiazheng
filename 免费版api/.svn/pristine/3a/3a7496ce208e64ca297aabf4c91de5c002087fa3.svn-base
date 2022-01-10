@@ -1,0 +1,48 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/29 0029
+ * Time: 13:48
+ */
+
+namespace app\controller\user;
+
+
+use app\controller\common\Common;
+use app\controller\common\Wl;
+use app\controller\drive\CarLine;
+use ruhua\bases\BaseController;
+use app\model\Plan as PlanModel;
+use app\model\Imgs as ImgsModel;
+use app\controller\drive\CarLine as DriveCarLine;
+
+class Order extends BaseController
+{
+
+
+
+    /**用户获取所有订单
+     * @param $mobile
+     * @param $code
+     * @return mixed
+     */
+    public function get_order($mobile,$code)
+    {
+        $res=Common::checkCode($mobile,$code);
+        $list=PlanModel::with('wl')->where('mobile',$mobile)->order('update_time desc')->select();
+        return app('json')->go($list);
+    }
+
+    /**
+     * 订单编号查询物流
+     */
+    public function get_order_by_num($order_num)
+    {
+        $list=PlanModel::with('wl')->where('order_num',$order_num)->order('update_time desc')->find();
+        return app('json')->go($list);
+    }
+
+
+
+}

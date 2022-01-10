@@ -1,0 +1,38 @@
+<?php
+declare (strict_types = 1);
+
+namespace app\model;
+
+use ruhua\bases\BaseModel;
+use ruhua\exceptions\BaseException;
+
+
+class Plan extends BaseModel
+{
+    public function wl()
+    {
+        return $this->hasMany('Logistics','order_id','id');
+    }
+
+    public function driver()
+    {
+        return $this->belongsTo('Driver','did','id');
+    }
+
+    public function  car()
+    {
+        return $this->belongsTo('Car','car_id','id');
+    }
+
+    /**判断订单是否存在
+     * @param $order_id
+     */
+    public static function check_plan($order_id)
+    {
+        $list=self::where('id',$order_id)->find();
+        if(!$list){
+            throw new BaseException(['msg'=>'订单不存在']);
+        }
+        return $list;
+    }
+}

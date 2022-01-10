@@ -1,0 +1,85 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/9/5 0005
+ * Time: 9:47
+ */
+
+namespace app\controller\map;
+
+
+use app\controller\common\Common;
+use app\model\SysConfig;
+use ruhua\bases\BaseController;
+
+/**轨迹管理
+ * Class Trace
+ * @package app\controller\map
+ */
+class Trace  extends BaseController
+{
+    private $key='';
+    private $baseCommon;
+    public function __construct()
+    {
+        $this->key=SysConfig::getMapKey();
+        $this->baseCommon=new Common();
+    }
+
+    /**
+     * 添加轨迹
+     */
+    public function add_trace($sid,$tid)
+    {
+        $url="https://tsapi.amap.com/v1/track/trace/add";
+        $data=[
+            'key'=>$this->key,
+            'sid'=>$sid,
+            'tid'=>$tid
+        ];
+        $res=$this->baseCommon->ly_curl_post($url,$data);
+        return $res;
+    }
+
+    /**删除轨迹
+     * @param $sid
+     * @param $tid
+     * @param $trid
+     * @return mixed
+     */
+    public function del_trace($sid,$tid,$trid)
+    {
+        $url="https://tsapi.amap.com/v1/track/trace/delete";
+        $data=[
+            'key'=>$this->key,
+            'sid'=>$sid,
+            'tid'=>$tid,
+            'trid'=>$trid
+        ];
+        $res=$this->baseCommon->ly_curl_post($url,$data);
+        return app('json')->go($res);
+    }
+
+
+    /**轨迹上传
+     * @param $sid
+     * @param $tid
+     * @param $trid
+     * @param $points
+     * @return mixed
+     */
+    public function upload_point($sid,$tid,$trid,$points)
+    {
+        $points=json_encode($points);
+        $data=[
+            'key'=>$this->key,
+            'sid'=>$sid,
+            'tid'=>$tid,
+            'trid'=>$trid,
+            'points'=>$points
+        ];
+        $res=$this->baseCommon->ly_curl_post($url,$data);
+        return app('json')->go($res);
+    }
+}

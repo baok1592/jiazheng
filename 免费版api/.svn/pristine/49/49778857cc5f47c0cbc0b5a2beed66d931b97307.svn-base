@@ -1,0 +1,151 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/29 0029
+ * Time: 11:29
+ */
+
+namespace app\controller\common;
+
+use Aliyun\api_demo\SmsDemo;
+use app\model\Msglog as MsglogModel;
+use app\model\SysConfig;
+use ruhua\exceptions\BaseException;
+use think\facade\Filesystem;
+use app\model\Imgs as ImgsModel;
+use think\facade\Log;
+
+class Common
+{
+    /**
+     * 管理员密码加密方式
+     * @param $password  密码
+     * @return string
+     */
+    function password($password)
+    {
+        $password_code = config('setting.psw_code');
+        return md5(md5($password) . md5($password_code));
+    }
+
+    /**发送手机验证码
+     * @param $mobile
+     */
+    public static function sendCodeMsg($mobile)
+    {
+        $code = rand(100000, 999999);
+        $list = MsglogModel::where('mobile', $mobile)->find();
+        $is_yzm=SysConfig::getYzm();
+        if (!$list) {
+            $res = MsglogModel::create(['mobile' => $mobile, 'code' => $code]);
+        } else {
+            $res = $list->save(['code' => $code]);
+        }
+        if ($res) {
+            if($is_yzm)
+                SmsDemo::sendSms($mobile,$code);
+            return app('json')->go(['code' => $code]);
+        }
+        return false;
+    }
+
+    /**验证验证码是否正确
+     * @param $mobile
+     * @param $code
+     * @return bool
+     * @throws BaseException
+     */
+    public static function checkCode($mobile, $code)
+    {
+        $list = MsglogModel::where(['mobile' => $mobile, 'code' => $code])->whereTime('update_time', '>', time() - 180)->find();
+        if (!$list) {
+            throw new BaseException(['msg' => '验证码不正确或已过期']);
+        }else{
+            $list->save(['code'=>null]);
+        }
+        return true;
+    }
+
+    public function upload_img()
+    {
+        $file=request()->file('img');
+        try{
+        $savename=Filesystem::disk('public')->putFile('img',$file,'data');
+        $savename= $img=str_replace("\\",'/',$savename);
+        $res=ImgsModel::create(['url'=>"/uploads/".$savename]);
+        return app('json')->go($res);
+        }catch(\Exception $e){
+            throw new BaseException(['msg'=>$e->getMessage()]);
+        }
+
+    }
+
+
+    //生成订单编号
+    function makeOrderNum()
+    {
+        $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K');
+        $orderSn =
+            $yCode[intval(date('Y')) - 2018] . strtoupper(dechex(date('m'))) . date(
+                'd') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf(
+                '%02d', rand(0, 99));
+        return $orderSn;
+    }
+
+    public function ly_curl_post($url, array $params = array())
+    {
+        $data_string = http_build_query($params);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt(
+            $ch, CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type:  application/x-www-form-urlencoded',
+            )
+        );
+        $data = curl_exec($ch);
+        curl_close($ch);
+        $data=json_decode($data,true);
+        return ($data);
+    }
+
+    public function ly_durl_get($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        //不做证书校验,部署在linux环境下请改为true
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $file_contents = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $file_contents=json_decode($file_contents,true);
+        curl_close($ch);
+        return $file_contents;
+    }
+
+    public function cache_url($url,$data)
+    {
+        $fig=0;
+        foreach ($data as $k=>$v){
+            if($fig==0){
+                $url.="?$k=$v";
+            }else{
+                $url.="&$k=$v";
+            }
+            $fig=1;
+        }
+        return $url;
+    }
+
+
+}

@@ -1,0 +1,26 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/31 0031
+ * Time: 15:57
+ */
+
+namespace app\controller\common;
+
+
+use ruhua\bases\BaseController;
+use app\model\LineUp as LineUpModel;
+
+class LineUp extends BaseController
+{
+    /**
+     * 查看排队情况
+     */
+    public function get_line()
+    {
+        $list=LineUpModel::with(['driver','car'])->select();
+        return app('json')->go($list);
+    }
+
+}

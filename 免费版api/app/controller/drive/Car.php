@@ -1,0 +1,75 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/31 0031
+ * Time: 8:58
+ */
+
+namespace app\controller\drive;
+
+
+use ruhua\bases\BaseController;
+use app\model\Car as CarModel;
+use ruhua\exceptions\BaseException;
+use app\model\CarFeeAppli as CarFeeAppliModel;
+use think\facade\Log;
+
+
+class Car extends BaseController
+{
+
+
+    /**获取所有车辆
+     * @return mixed
+     */
+    public function get_all_car()
+    {
+        $did=4;
+        $list=CarModel::with('user')->where('uid',$did)->select();
+        return app('json')->go($list);
+    }
+
+    /**司机查看所有申报
+     * @return mixed
+     */
+    public function get_user_car_fee()
+    {
+        $did=4;
+        $list=CarFeeAppliModel::where('uid',$did)->select();
+        return app('json')->go($list);
+    }
+
+    public function upload_positon()
+    {
+        $data=input('post.');
+        Log::error($data);
+        $res=CarModel::update($data,['equip_num'=>$data['equip_num']]);
+    }
+
+    /**
+     * 司机点击运输
+     */
+    public function trans()
+    {
+
+
+        base64_encode();
+        base64_decode();
+
+        $uid=4;
+        $list=CarModel::where(['uid'=>$uid,'is_bind'=>1])->find();
+        if(!$list){
+            throw new BaseException(['msg'=>'车辆不存在']);
+        }
+        if($list['state']!=0){
+            throw new BaseException(['msg'=>'车辆未空闲']);
+        }
+        $res=$list->save(['state'=>1]);
+        return app('json')->go($res);
+    }
+
+
+
+
+}

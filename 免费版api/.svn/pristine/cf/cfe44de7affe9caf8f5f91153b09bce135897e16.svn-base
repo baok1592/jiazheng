@@ -1,0 +1,72 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/9/7 0007
+ * Time: 18:40
+ */
+
+namespace app\controller\map;
+
+
+use ruhua\bases\BaseController;
+use app\model\SysConfig;
+use app\controller\common\Common;
+use think\facade\Log;
+use app\model\Car as CarModel;
+
+class Start extends BaseController
+{
+    private $key='';
+    private $baseCommon;
+    public function __construct()
+    {
+        $this->key=SysConfig::getMapKey();
+        $this->baseCommon=new Common();
+    }
+
+    /**
+     * 服务连接
+     */
+    public function connect()
+    {
+        $data=input('post.');
+
+        $svce=(new Service());
+        $service=$svce->get_Service();
+        $sid=$service['data']['results'][0]['sid'];
+        if(!$sid)
+        {
+            $svce->create_Service('yswl');
+        }
+        $service=$svce->get_Service();
+        $sid=$service['data']['results'][0]['sid'];
+        $this->connect_Terminal($sid,$data);
+
+
+    }
+
+    /**终端连接
+     * @param $sid
+     * @param $num
+     */
+    public function connect_Terminal($sid,$data)
+    {
+
+        $term=new Terminal();
+        $list=$term->search_terminal($sid,$data['equip_num']);
+
+        if($list['data']==null){
+            $car=CarModel::with('user')->where('equip_num',$data['equip_num'])->find();
+            $term->create_terminal($sid,$data['equip_num'],$data['equip_num'],$car);
+            Log::error("car111******************");
+            Log::error($term);
+            Log::error("car111******************");
+        }
+        $list=$term->search_terminal($sid,$data['equip_num']);
+        Log::error("car******************");
+        Log::error($list);
+        Log::error("car******************");
+
+    }
+}

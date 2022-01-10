@@ -1,0 +1,272 @@
+<?php
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: liu21st <liu21st@gmail.com>
+// +----------------------------------------------------------------------
+use think\facade\Route;
+
+Route::get('', function () {
+    echo '永顺物流'.VAE_VERSION.'(开发板)';
+});
+
+
+/**
+ * 公用
+ */
+Route::group('common', function () {
+    Route::post('get_mobile_code', 'common.Common/sendCodeMsg');//获取手机验证码
+    Route::post('upload_img', 'common.Common/upload_img');//上传图片
+    Route::post('user_login', 'common.Common/user_login');//用户登录
+    Route::get('get_order_by_num', 'user.Order/get_order_by_num');//订单编号查询物流
+
+    Route::group('lineup', function () {
+        Route::get('get_lineup', 'common.LineUp/get_line');//获取排队信息
+        Route::get('up_qrcode', 'common.LineUp/up_qrcode');//实时更新二维码
+    });
+
+});
+
+/**
+ * 权限登录
+ */
+Route::group('login', function () {
+    Route::post('admin_login', 'admin.Admin/login');//管理员登录
+    Route::post('drive_login', 'drive.Drive/login');//司机录
+    Route::post('shops_login', 'business.Business/login');//商家登录
+});
+
+/**
+ * 工作人员
+ */
+Route::group('worker', function () {
+    Route::get('get_infor', 'worker.Worker/get_infor');//管理员登录
+
+    //调度员
+    Route::group('ddworker', function () {
+        Route::get('get_no_plan', 'worker.DdWorker/get_no_plan');//获取等待分配的
+        Route::get('get_fleet', 'admin.Fleet/get');//获取车队信息
+        Route::get('get_driver_fid', 'admin.Fleet/get_driver_fid');//id获取车队成员
+        Route::post('car_dd', 'worker.DdWorker/add');//调度员调度车辆
+        Route::get('get_driver', 'admin.User/get_driver');//获取司机信息
+    });
+
+    //快递单员
+    Route::group('kdworker', function () {
+        Route::post('add_trans', 'worker.KdWorker/add_trans');//添加物流
+        Route::put('add_peisong', 'worker.KdWorker/add_peisong');//物流配送
+    });
+
+    //会计员
+    Route::group('kjworker', function () {
+
+    });
+
+    //油站管理员
+    Route::group('yzworker', function () {
+        Route::post('add_car_oil', 'admin.Oil/add_car_oil');//车辆加油信息添加
+
+    });
+
+});
+
+/**
+ * 服务
+ */
+Route::group('server', function () {
+    Route::get('swoole', 'swoole.Socket/start');//swoole开启
+    Route::post('update_position', 'drive.Car/upload_positon');//更新位置坐标
+    Route::post('upload_ly', 'map.Start/connect');//上传行车坐标
+});
+
+/**
+ * 管理员
+ */
+Route::group('admin', function () {
+    Route::put('bind_mobile', 'admin.Admin/bind_mobile');//绑定接收短信通知的电话号码
+    Route::post('mobile_login', 'admin.Admin/mobile_login');//手机验证登录
+    Route::post('update_infor', 'admin.Admin/update_infor');//修改个人信息
+    Route::get('get_infor', 'admin.Admin/get_infor');//查看个人信息
+
+//用户管理
+Route::group('user', function () {
+    Route::post('add_driver', 'admin.User/add_driver');//添加司机
+    Route::post('add_shops', 'admin.User/add_shops');//添加卖家
+    Route::delete('del_drive', 'admin.User/del_drive');//删除司机
+    Route::delete('del_shops', 'admin.User/del_shops');//删除卖家账号
+    Route::get('get_all_shops', 'admin.User/get_all_shops');//获取商家信息
+    Route::post('update_shops', 'admin.User/update_shops');//更新商家信息
+    Route::get('get_driver', 'admin.User/get_driver');//获取司机信息
+    Route::post('update_driver', 'admin.User/update_driver');//更新司机信息
+});
+
+
+//部门管理员
+    Route::group('worker', function () {
+        Route::post('add_work', 'admin.Worker/add_work');//部门管理员添加
+        Route::post('update_work', 'admin.Worker/update_work');//更新部门管理员
+        Route::get('get_worker', 'admin.Worker/get_worker');//查看部门管理员
+        Route::delete('del_worker', 'admin.Worker/del_worker');//查看部门管理员
+    });
+
+
+    //车辆管理
+    Route::group('car', function () {
+        Route::post('add_car', 'admin.Car/add_car');//添加车辆
+        Route::delete('del_car', 'admin.Car/del_car');//删除车辆
+        Route::post('update_car', 'admin.Car/update_car');//更新车辆信息
+        Route::get('get_all_car', 'admin.Car/get_all_car');//查看所有车辆信息
+        Route::post('add_car_fee_appli', 'admin.Car/add_car_fee_appli');//车辆费用申报
+        Route::put('bind_equip', 'admin.Car/bind_equip');//绑定设备
+        Route::get('get_all_plan', 'admin.Plan/get_all');//运输记录
+    });
+
+    Route::group('fleet', function () {
+        Route::post('add_fleet', 'admin.Fleet/add');//增加车队
+        Route::put('update_fleet', 'admin.Fleet/update');//分销车队信息
+        Route::get('get_fleet', 'admin.Fleet/get');//获取车队信息
+        Route::delete('del_fleet', 'admin.Fleet/del');//删除车队信息
+        Route::put('add_fleet_user', 'admin.Fleet/add_user');//添加车队成员
+        Route::put('del_fleet_user', 'admin.Fleet/del_user');//删除车队成员
+        Route::get('get_driver_fid', 'admin.Fleet/get_driver_fid');//id获取车队成员
+    });
+
+    Route::group('trial', function () {
+        Route::put('car_fee', 'admin.Trial/car_fee');//车辆费用审核
+        Route::put('OilAppli', 'admin.Trial/OilAppli');//油购审批
+        Route::put('plan_trial', 'admin.Trial/plan_trial');//运单财务打款审核
+    });
+
+
+    Route::group('oil', function () {
+        Route::get('get_oil', 'admin.Oil/get_oil');//获取油库信息
+        Route::post('add_oil_appli', 'admin.Oil/add_oil_appli');//油站申购
+        Route::get('get_oil_appli', 'admin.Oil/get_oil_appli');//获取油站申购信息
+        Route::get('get_car_oil', 'admin.Oil/get_car_oil');//查看车辆加油的数据
+
+    });
+
+
+    Route::group('parts', function () {
+        Route::post('add_type', 'admin.Parts/add_type');//添加零配件类型
+        Route::post('add_parts_appli', 'admin.Parts/appli');//添加零配件申购
+        Route::get('get_parts', 'admin.Parts/get_parts');//查看所有零配件信息
+        Route::get('get_appli', 'admin.Parts/get_appli');//查看所有零配件申购信息
+    });
+
+
+    Route::group('park', function () {
+        Route::post('add_park', 'admin.Park/add_park');//添加停车场所
+        Route::post('update_park', 'admin.Park/update_park');//更新停车场所
+        Route::delete('del_park', 'admin.Park/del_park');//删除停车场所
+        Route::get('get_park', 'admin.Park/get_park');//获取全部停车场所
+        Route::get('get_park_id', 'admin.Park/get_park_id');//id获取停车场所
+    });
+});
+
+
+/**
+ * 商户管理
+ */
+Route::group('business', function () {
+    Route::get('get_infor', 'business.Business/get_infor');//商户获取个人信息
+    Route::post('update_infor', 'business.Business/update_infor');//商户修改个人信息
+    Route::post('add_order', 'business.Order/add_order');//添加订单
+    Route::get('get_order', 'business.Order/get_order');//获取订单
+
+
+});
+
+
+//司机管理
+Route::group('driver', function () {
+
+    Route::get('get_infor', 'drive.Drive/get_infor');//司机获取个人信息
+    Route::get('get_oil_record', 'drive.Oil/get_oil_record');//司机获取加油记录
+    Route::post('update_infor', 'drive.Drive/update_infor');//司机修改个人信息
+    //车辆管理
+    Route::group('car', function () {
+        Route::post('add_car_fee_appli', 'drive.Car/add_car_fee_appli');//车辆费用申报
+        Route::get('get_all_car', 'drive.Car/get_all_car');//司机获取自己的车辆
+        Route::get('get_user_car_fee', 'drive.Car/get_user_car_fee');//司机查看自己车辆申报
+    });
+
+    Route::group('lineup', function () {
+        Route::post('add_line', 'drive.CarLine/add');//司机加入队列
+        Route::delete('cancel_line', 'drive.CarLine/cancel_line');//司机取消排队
+    });
+
+    Route::group('order', function () {
+        Route::get('get_trans_plan', 'drive.Drive/get_trans_plan');//司机查看自己接的订单
+        Route::post('user_sign', 'drive.Order/user_sign');//订单签收
+    });
+
+    Route::group('qrcode', function () {
+        Route::post('add_qrocde', 'drive.Park/qrcode');//司机扫码
+    });
+
+
+
+});
+
+//用户功能
+Route::group('user', function () {
+    Route::post('login', 'user.User/login');//用户手机登录
+    Route::group('order', function () {
+
+        Route::get('get_order', 'user.Order/get_order');//用户查看订单状况
+        Route::get('get_order_by_num', 'user.Order/get_order_by_num');//订单编号查询物流
+    });
+});
+
+
+
+
+//猎鹰接口
+Route::group('map', function () {
+
+    //服务管理
+    Route::group('service', function () {
+        Route::post('create_Service', 'map.Service/create_Service');//创建服务
+        Route::delete('del_Service', 'map.Service/del_Service');//删除服务
+        Route::put('update_Service', 'map.Service/update_Service');//更新服务
+        Route::get('get_Service', 'map.Service/get_Service_api');//查看服务
+    });
+
+
+    //终端管理
+    Route::group('terminal', function () {
+        Route::post('create_terminal', 'map.Terminal/create_terminal');//创建终端
+        Route::delete('delete_terminal', 'map.Terminal/delete_terminal');//删除终端
+        Route::put('update_terminal', 'map.Terminal/update_terminal');//更新终端
+        Route::get('get_terminal', 'map.Terminal/get_terminal');//查看终端
+        Route::post('search_terminal', 'map.Terminal/search_terminal');//终端搜索
+        Route::post('round_search_terminal', 'map.Terminal/round_search_terminal');//周围终端搜索
+    });
+
+    //终端管理
+    Route::group('trace', function () {
+        Route::get('get_trace', 'map.Trace/get_trace');//查看轨迹
+        Route::get('upload_point', 'map.Trace/upload_point');//添加轨迹
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

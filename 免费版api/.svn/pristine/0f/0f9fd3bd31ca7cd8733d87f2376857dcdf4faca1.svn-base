@@ -1,0 +1,113 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/31 0031
+ * Time: 15:00
+ */
+
+namespace app\controller\admin;
+
+
+use ruhua\bases\BaseController;
+use app\model\Oil as OilModel;
+use app\model\OilAppli as OilAppliModel;
+use app\model\Car as CarModel;
+use ruhua\exceptions\BaseException;
+use app\model\CarOil as CarOilModel;
+use app\model\CarFee as CarFeeModel;
+use app\model\Plan as PlanModel;
+
+class Oil extends BaseController
+{
+    /**查看油库信息
+     * @return mixed
+     */
+    public function get_oil()
+    {
+        $list=OilModel::select();
+        if(!count($list)){
+            $list=OilModel::create(['use'=>0,'stock'=>0,'price'=>0]);
+        }
+        return app('json')->go($list);
+    }
+
+    /**
+     * 油库申购
+     */
+    public function add_oil_appli()
+    {
+        $data=input('post.');
+        $rule=[
+            'num'=>'require',
+            'price'=>'require',
+        ];
+        $this->validate($data,$rule);
+        $data['total']=$data['num']*$data['price'];
+        $res=OilAppliModel::create($data);
+        return app('json')->go($res);
+    }
+
+    /**
+     * 获取油库申购信息
+     */
+    public function get_oil_appli()
+    {
+        $res=OilAppliModel::order('state asc')->select();
+        return app('json')->go($res);
+    }
+
+    /**
+     * 加油信息填写
+     */
+    public function add_car_oil()
+    {
+        $data=input('post.');
+        $rule=[
+            'car_id'=>'require',
+            'before_oil'=>'require',
+            'num'=>'require',
+            'after_oid'=>'require',
+            'price'=>'require',
+            'total'=>'require',
+            'order_num'=>'require'
+        ];
+        $this->validate($data,$rule);
+        $order=PlanModel::where(['order_num'=>$data['order_num']])
+            ->where('status','<',2)
+            ->find();
+        if(!$order){
+            throw new BaseException(['msg'=>'订单不存在']);
+        }
+
+
+        $car=CarModel::where('id',$data['car_id'])->find();
+        if(!$car){
+            throw new BaseException(['msg'=>'车辆数据错误']);
+        }
+        if($data['num']*$data['price']!=$data['total']){
+            throw new BaseException(['msg'=>'数据有误']);
+        }
+        $res=CarOilModel::create($data);
+        if($res)
+        {
+            $oil=OilModel::where('id','>','0')->find();
+            OilModel::update(['use'=>($oil['use']+$data['num'])],['id'=>$oil['id']]);
+            $carFee=CarFeeModel::where('car_id',$data['car_id'])->find();
+            if($carFee){
+                CarFeeModel::update(['oil'=>($carFee['oil']+$data['num'])],['id'=>$carFee['id']]);
+            }else{
+                CarFeeModel::create(['car_id'=>$data['car_id'],'oil'=>$data['num']]);
+            }
+        }
+        return app('json')->go($res);
+    }
+
+    public function get_car_oil()
+    {
+        $res=CarOilModel::with(['car','plan'])->select();
+        return app('json')->go($res);
+    }
+
+    
+}

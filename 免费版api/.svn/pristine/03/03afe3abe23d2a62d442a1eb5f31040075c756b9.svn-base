@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/9/7 0007
+ * Time: 18:40
+ */
+
+namespace app\controller\map;
+
+
+use ruhua\bases\BaseController;
+use app\model\SysConfig;
+use app\controller\common\Common;
+
+class Start extends BaseController
+{
+    private $key='';
+    private $baseCommon;
+    public function __construct()
+    {
+        $this->key=SysConfig::getMapKey();
+        $this->baseCommon=new Common();
+    }
+    public function connect()
+    {
+        $data=input('post.');
+
+    }
+}

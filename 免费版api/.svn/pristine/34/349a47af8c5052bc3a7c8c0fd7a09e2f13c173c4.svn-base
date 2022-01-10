@@ -1,0 +1,86 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/9/1 0001
+ * Time: 10:09
+ */
+
+namespace app\controller\admin;
+
+
+use ruhua\bases\BaseController;
+use app\model\Parts as PartsModel;
+use ruhua\exceptions\BaseException;
+use app\model\PartsAppli as PartsPaaliModel;
+
+class Parts extends BaseController
+{
+    /**
+     * 添加零配件
+     */
+    public function add_type()
+    {
+        $data=input('post.');
+        $rule=[
+            'name'=>'require',
+            'model'=>'require',
+            'price'=>'require'
+        ];
+        $this->validate($data,$rule);
+        $list=PartsModel::where(['name'=>$data['name']])->find();
+        if($list){
+            throw new BaseException(['msg'=>'型号已存在']);
+        }
+        $res=PartsModel::create($data);
+        return app('json')->go($res);
+    }
+
+    /**
+     * 零配件申购
+     */
+    public function appli()
+    {
+        $data=input('post.');
+        $rule=[
+            'parts'=>'require',
+            'num'=>'require',
+            'price'=>'require',
+            'total'=>'require',
+        ];
+        $this->validate($data,$rule);
+        $parts=PartsModel::where('id',$data['parts'])->find();
+        if(!$parts){
+            throw new BaseException(['msg'=>'零配件数据有误']);
+        }
+        $res=PartsPaaliModel::create($data);
+        if($res){
+            PartsModel::update(['stock'=>($parts['stock']+$data['num'])],['id'=>$parts['id']]);
+        }
+        return app('json')->go($res);
+    }
+
+
+    /**获取所有零配件
+     * @return mixed
+     */
+    public function get_parts()
+    {
+        $res=PartsModel::select();
+        return app('json')->go($res);
+    }
+
+    /**获取零配件申购
+     * @return mixed
+     */
+    public function get_appli()
+    {
+        $res=PartsPaaliModel::select();
+        return app('json')->go($res);
+    }
+
+
+
+
+
+}

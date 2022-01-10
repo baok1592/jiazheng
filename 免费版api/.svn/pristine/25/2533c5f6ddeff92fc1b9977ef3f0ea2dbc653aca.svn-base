@@ -1,0 +1,98 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/9/7 0007
+ * Time: 18:40
+ */
+
+namespace app\controller\map;
+
+
+use ruhua\bases\BaseController;
+use app\model\SysConfig;
+use app\controller\common\Common;
+use think\facade\Log;
+use app\model\Car as CarModel;
+use app\model\Plan as PlanModel;
+
+class Start extends BaseController
+{
+    private $key='';
+    private $baseCommon;
+    public function __construct()
+    {
+        $this->key=SysConfig::getMapKey();
+        $this->baseCommon=new Common();
+    }
+
+    /**
+     * 服务连接
+     */
+    public function connect()
+    {
+        $data=input('post.');
+
+        $svce=(new Service());
+        $service=$svce->get_Service();
+        $sid=$service['data']['results'][0]['sid'];
+        if(!$sid)
+        {
+            $svce->create_Service('yswl');
+        }
+        $service=$svce->get_Service();
+        $sid=$service['data']['results'][0]['sid'];
+        $this->connect_Terminal($sid,$data);
+
+
+    }
+
+    /**终端连接
+     * @param $sid
+     * @param $num
+     */
+    public function connect_Terminal($sid,$data)
+    {
+        $term=new Terminal();
+        $equip_num=$data['equip_num'];
+        Log::error("test1********************************************************");
+        $car=CarModel::where('equip_num',$equip_num)->find();
+        if($car['tid']==null){
+           $res=$term->create_terminal($sid,$equip_num,$car['car_num']);
+           Log::error($res);
+            $car->save(['tid'=>$res['data']['tid']]);
+            $tid=$res['data']['tid'];
+        }else{
+            $tid=$car['tid'];
+        }
+        Log::error("test2********************************************************");
+        $this->upload_trace($sid,$tid,$data,$car['id']);
+        Log::error("tid:$tid");
+    }
+
+    public function upload_trace($sid,$tid,$data,$car_id)
+    {
+
+        Log::error("test3********************************************************");
+        $trace=new Trace();
+        $order=PlanModel::where(['car_id'=>$car_id])->where('status','<',3)->find();
+        if(!$order){
+            return;
+        }
+        if($order['trid']==null){
+            $res=$trace->add_trace($sid,$tid);
+            $order->save(['trid'=>$res['data']['trid']]);
+            $trid=$res['data']['trid'];
+        }else{
+            $trid=$order['trid'];
+        }
+        Log::error("test4********************************************************");
+        $points[0]['location']=$data['position'];
+        $points[0]['locatetime']=time()*1000;
+        $points[0]['speed']=$data['speed'];
+        $points[0]['direction']=$data['direction'];
+        $res=$trace->upload_point($sid,$tid,$trid,$points);
+
+
+    }
+}

@@ -1,0 +1,138 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/29 0029
+ * Time: 15:14
+ */
+
+namespace app\controller\admin;
+
+
+use ruhua\bases\BaseController;
+use app\model\Car as CarModel;
+use ruhua\exceptions\BaseException;
+use app\model\Driver as DriveerModel;
+use app\model\CarFeeAppli as CarFeeAppliModel;
+
+class Car extends BaseController
+{
+    /**添加车辆
+     * @return mixed
+     * @throws BaseException
+     */
+    public function add_car()
+    {
+        $data=input('post.');
+        $rule=[
+          'car_num'=>'require',
+            'uid'=>'require',
+            'tonnage'=>'require',
+            'type'=>'require',
+        ];
+
+        $this->validate($data,$rule);
+        $list=CarModel::where('car_num',$data['car_num'])->find();
+        if($list){
+            throw new BaseException(['msg'=>'车牌已存在']);
+        }
+        $user=DriveerModel::where('id',$data['uid'])->find();
+        if(!$user){
+            throw new BaseException(['msg'=>'司机不存在']);
+        }
+        if($data['is_bind']==1){
+            CarModel::update(['is_bind'=>0],['uid'=>$data['uid']]);
+        }
+        $res=CarModel::create($data);
+        return app('json')->go($res);
+    }
+
+    /**删除车辆
+     * @param $id
+     * @return mixed
+     */
+    public function del_car($id)
+    {
+        $res=CarModel::destroy($id);
+        return app('json')->go($res);
+    }
+
+    /**更新车辆
+     * @return mixed
+     * @throws BaseException
+     */
+    public function update_car()
+    {
+        $data=input('post.');
+        $rule=[
+            'car_num'=>'require',
+            'uid'=>'require',
+            'tonnage'=>'require',
+            'type'=>'require',
+            'id'=>'require',
+        ];
+        $this->validate($data,$rule);
+        $list=CarModel::where('id',$data['id'])->find();
+        if(!$list){
+            throw new BaseException(['msg'=>'车辆不存在']);
+        }
+        $res=$list->save($data);
+        return app('json')->go($res);
+    }
+
+    /**获取所有车辆
+     * @return mixed
+     */
+    public function get_all_car()
+    {
+        $list=CarModel::with('user')->select();
+        return app('json')->go($list);
+    }
+
+
+    /**车辆费用申报
+     * @return mixed
+     */
+    public function add_car_fee_appli()
+    {
+        $data=input('post.');
+        $rule=[
+            'car_id'=>'require',
+            'type'=>'require',
+            'fee'=>'require',
+        ];
+        $uid=CarModel::where('id',$data['car_id'])->value('uid');
+        $this->validate($data,$rule);
+        $carlsit=CarModel::where('id',$data['car_id'])->find();
+        if(!$carlsit){
+            throw new BaseException(['msg'=>'车辆信息错误']);
+        }
+        $data['uid']=$uid;
+        $res=CarFeeAppliModel::create($data);
+        return app('json')->go($res);
+    }
+
+    /**设备绑定
+     * @param $id
+     * @param $num
+     */
+    public function bind_equip($id,$num)
+    {
+        $car=CarModel::where('id',$id)->find();
+        if(!$car){
+            throw new BaseException(['msg'=>'车辆不存在']);
+        }
+        $equip=CarModel::where(['car_num'=>$num])->find();
+        if($equip){
+            throw new BaseException(['msg'=>'设备已绑定在其他车辆上']);
+        }
+
+        $res=$car->save(['car_num'=>$num]);
+    }
+
+
+
+
+
+
+}

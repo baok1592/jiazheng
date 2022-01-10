@@ -1,0 +1,37 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2020/8/29 0029
+ * Time: 13:40
+ */
+
+namespace app\controller\business;
+
+
+use ruhua\bases\BaseController;
+use app\model\Business as BudinessModel;
+
+class Business extends BaseController
+{
+
+    /**登录
+     * @return mixed
+     */
+    public function login()
+    {
+        $post=input('post.');
+        $res=BudinessModel::login($post);
+        return app('json')->go($res);
+    }
+
+    /**
+     * 获取个人信息
+     */
+    public function get_infor()
+    {
+        $uid=1;
+        $res=BudinessModel::where('id',$uid)->find();
+        return app('json')->go($res);
+    }
+}

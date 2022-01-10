@@ -1,0 +1,13 @@
+<?php
+// 事件定义文件
+//'app\\behavior\\CORS'
+return [
+
+    'listen' => [
+        'AppInit' => [],
+        'HttpRun' => [],
+        'HttpEnd' => [],
+        'LogLevel' => [],
+        'LogWrite' => [],
+    ],
+];

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "发现",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "tabbar": "/components/tabbar"
+  }
+}

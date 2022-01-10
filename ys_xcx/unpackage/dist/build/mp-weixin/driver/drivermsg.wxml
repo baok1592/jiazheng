@@ -1,0 +1,1 @@
+<view class="drivermsg data-v-6dce6126"><driver-message vue-id="28a93146-1" class="data-v-6dce6126" bind:__l="__l"></driver-message><view class="btn data-v-6dce6126"><button type="primary" data-event-opts="{{[['tap',[['jump_map',['$event']]]]]}}" bindtap="__e" class="data-v-6dce6126">查看详情</button></view></view>

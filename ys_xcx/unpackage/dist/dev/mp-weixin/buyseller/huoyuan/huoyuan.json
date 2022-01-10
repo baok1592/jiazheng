@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "发布货源",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon",
+    "u-form": "/node-modules/uview-ui/components/u-form/u-form",
+    "u-form-item": "/node-modules/uview-ui/components/u-form-item/u-form-item",
+    "u-input": "/node-modules/uview-ui/components/u-input/u-input"
+  }
+}

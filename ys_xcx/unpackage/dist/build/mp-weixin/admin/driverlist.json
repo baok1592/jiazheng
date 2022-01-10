@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "司机列表",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "drivermoment": "/components/drivermoment"
+  }
+}

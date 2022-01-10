@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "车辆调度",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-select": "/node-modules/uview-ui/components/u-select/u-select",
+    "u-radio-group": "/node-modules/uview-ui/components/u-radio-group/u-radio-group",
+    "u-radio": "/node-modules/uview-ui/components/u-radio/u-radio"
+  }
+}

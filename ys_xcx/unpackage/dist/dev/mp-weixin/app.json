@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/ceshi",
+    "admin/admin",
+    "driver/driver",
+    "driver/drivermsg",
+    "admin/adminindex",
+    "buyseller/buy",
+    "buyseller/ditu",
+    "pages/find/find",
+    "pages/user/user",
+    "admin/cars",
+    "admin/driverlist",
+    "admin/parkinglot",
+    "driver/detailed/detailed",
+    "driver/personal/personal",
+    "driver/modify/modify",
+    "buyseller/huoyuan/huoyuan",
+    "driver/gas/gas",
+    "driver/drawal/drawal",
+    "admin/driver/driver",
+    "admin/carDetail/carDetail",
+    "admin/peopleList/peopleList",
+    "driver/driverOilList/driverOilList",
+    "pages/newsDetail/newsDetail",
+    "driver/modifyInfo/modifyInfo",
+    "admin/scheduling/scheduling",
+    "pages/picUpload/picUpload"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

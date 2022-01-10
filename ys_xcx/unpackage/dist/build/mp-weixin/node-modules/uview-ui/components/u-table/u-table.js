@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["node-modules/uview-ui/components/u-table/u-table"],{"0a3a":function(t,e,n){},"70bc":function(t,e,n){"use strict";n.r(e);var r=n("79f3"),a=n("9b74");for(var o in a)"default"!==o&&function(t){n.d(e,t,(function(){return a[t]}))}(o);n("f41d");var u,f=n("f0c5"),l=Object(f["a"])(a["default"],r["b"],r["c"],!1,null,"5aa350e1",null,!1,r["a"],u);e["default"]=l.exports},"79f3":function(t,e,n){"use strict";var r;n.d(e,"b",(function(){return a})),n.d(e,"c",(function(){return o})),n.d(e,"a",(function(){return r}));var a=function(){var t=this,e=t.$createElement,n=(t._self._c,t.__get_style([t.tableStyle]));t.$mp.data=Object.assign({},{$root:{s0:n}})},o=[]},"7aa5":function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var r={name:"u-table",props:{borderColor:{type:String,default:"#e4e7ed"},align:{type:String,default:"center"},padding:{type:String,default:"10rpx 6rpx"},fontSize:{type:[String,Number],default:28},color:{type:String,default:"#606266"},thStyle:{type:Object,default:function(){return{}}},bgColor:{type:String,default:"#ffffff"}},data:function(){return{}},computed:{tableStyle:function(){var t={};return t.borderLeft="solid 1px ".concat(this.borderColor),t.borderTop="solid 1px ".concat(this.borderColor),t.backgroundColor=this.bgColor,t}}};e.default=r},"9b74":function(t,e,n){"use strict";n.r(e);var r=n("7aa5"),a=n.n(r);for(var o in r)"default"!==o&&function(t){n.d(e,t,(function(){return r[t]}))}(o);e["default"]=a.a},f41d:function(t,e,n){"use strict";var r=n("0a3a"),a=n.n(r);a.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'node-modules/uview-ui/components/u-table/u-table-create-component',
+    {
+        'node-modules/uview-ui/components/u-table/u-table-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("70bc"))
+        })
+    },
+    [['node-modules/uview-ui/components/u-table/u-table-create-component']]
+]);

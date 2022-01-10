@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['jump',['$event']]]]]}}" class="return" bindtap="__e"><u-icon vue-id="3646203b-1" name="arrow-left" size="30" bind:__l="__l"></u-icon>返回</view>

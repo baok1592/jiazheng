@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "人物列表",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "people": "/admin/peopleList/components/people"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "加油列表",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "oil-list": "/driver/driverOilList/components/oil-list"
+  }
+}

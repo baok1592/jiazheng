@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "停车场",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-table": "/node-modules/uview-ui/components/u-table/u-table",
+    "u-tr": "/node-modules/uview-ui/components/u-tr/u-tr",
+    "u-th": "/node-modules/uview-ui/components/u-th/u-th",
+    "u-td": "/node-modules/uview-ui/components/u-td/u-td"
+  }
+}

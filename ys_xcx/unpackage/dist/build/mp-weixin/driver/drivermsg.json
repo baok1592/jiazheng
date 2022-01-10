@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "交易档案",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#f3f4f6",
+  "usingComponents": {
+    "driver-message": "/components/driverMessage"
+  }
+}

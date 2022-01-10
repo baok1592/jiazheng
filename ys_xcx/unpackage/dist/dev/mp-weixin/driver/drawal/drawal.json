@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "打款记录",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "tx": "/components/tixian"
+  }
+}

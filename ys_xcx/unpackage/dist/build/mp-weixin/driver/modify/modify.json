@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "信息编辑",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
+    "mf": "/components/modifymsg"
+  }
+}

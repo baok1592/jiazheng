@@ -1,0 +1,244 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ 
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "永顺物流",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/index/ceshi",
+			"style": {
+				"navigationBarTitleText": "永顺物流",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "admin/admin",
+			"style": {
+				"navigationBarTitleText": "发货详情",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "driver/driver",
+			"style": {
+				"navigationBarTitleText": "我的交易档案",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "driver/drivermsg",
+			"style": {
+				"navigationBarTitleText": "交易档案",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white",
+				"backgroundColor": "#f3f4f6"
+			}
+		},
+		{
+			"path": "admin/adminindex",
+			"style": {
+				"navigationBarTitleText": "货源广场",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "buyseller/buy",
+			"style": {
+				"navigationBarTitleText": "货物物流信息",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "buyseller/ditu",
+			"style": {
+				"navigationBarTitleText": "物流详情",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/find/find",
+			"style": {
+				"navigationBarTitleText": "发现",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "admin/cars",
+			"style": {
+				"navigationBarTitleText": "车队管理",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "admin/driverlist",
+			"style": {
+				"navigationBarTitleText": "司机列表",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "admin/parkinglot",
+			"style": {
+				"navigationBarTitleText": "停车场",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		}, {
+			"path": "driver/detailed/detailed",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "driver/personal/personal",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "driver/modify/modify",
+			"style": {
+				"navigationBarTitleText": "信息编辑",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "buyseller/huoyuan/huoyuan",
+			"style": {
+				"navigationBarTitleText": "发布货源",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+		}
+	    ,{
+            "path" : "driver/gas/gas",
+            "style": {
+            	"navigationBarTitleText": "加油",
+            	"navigationBarBackgroundColor": "#2979FF",
+            	"navigationBarTextStyle": "white"
+            }
+        },
+        {
+        	"path": "driver/drawal/drawal",
+        	"style": {
+        		"navigationBarTitleText": "打款记录",
+        		"navigationBarBackgroundColor": "#2979FF",
+        		"navigationBarTextStyle": "white"
+        	}
+        }
+        ,{
+            "path" : "admin/driver/driver",
+            "style" : {
+				"navigationBarTitleText": "详细信息",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+        }
+        ,{
+            "path" : "admin/carDetail/carDetail",
+            "style" : {
+				"navigationBarTitleText": "车辆详细信息",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+        }
+        ,{
+            "path" : "admin/peopleList/peopleList",
+            "style" : {
+				"navigationBarTitleText": "人物列表",
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+			}
+        }
+        ,{
+            "path" : "driver/driverOilList/driverOilList",
+            "style" : {
+                "navigationBarTitleText": "加油列表",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/newsDetail/newsDetail",
+            "style" : {
+                "navigationBarTitleText": "新闻详细",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+            }
+            
+        }
+        ,{
+            "path" : "driver/modifyInfo/modifyInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改信息",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+            }
+            
+        }
+        ,{
+            "path" : "admin/scheduling/scheduling",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "车辆调度",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/picUpload/picUpload",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "回单上传",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#2979FF",
+				"navigationBarTextStyle": "white"
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

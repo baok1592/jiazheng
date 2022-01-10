@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "修改信息",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-field": "/node-modules/uview-ui/components/u-field/u-field"
+  }
+}

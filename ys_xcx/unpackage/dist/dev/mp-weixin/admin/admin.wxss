@@ -1,0 +1,284 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.admin.data-v-eab21e1e {
+  width: 100%;
+}
+.admin .admin-header.data-v-eab21e1e {
+  width: 100%;
+  height: 310rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #2979FF 85%, #ffffff 15%);
+}
+.admin .admin-header .admin-header-top.data-v-eab21e1e {
+  width: 94%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-left.data-v-eab21e1e {
+  width: 15%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-left .admin-header-top-left-top.data-v-eab21e1e {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-left .admin-header-top-left-top text.data-v-eab21e1e {
+  font-size: 30rpx;
+  color: white;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  opacity: .8;
+}
+.admin .admin-header .admin-header-top .admin-header-top-left .admin-header-top-left-bt.data-v-eab21e1e {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-left .admin-header-top-left-bt text.data-v-eab21e1e {
+  font-size: 25rpx;
+  color: white;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  opacity: .8;
+}
+.admin .admin-header .admin-header-top .admin-header-top-middle.data-v-eab21e1e {
+  width: 20%;
+  height: 60%;
+  font-display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.admin .admin-header .admin-header-top .admin-header-top-middle .admin-header-top-middle-center.data-v-eab21e1e {
+  width: 100%;
+  height: 60%;
+}
+.admin .admin-header .admin-header-top .admin-header-top-right.data-v-eab21e1e {
+  width: 15%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-right .admin-header-top-right-top.data-v-eab21e1e {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-right .admin-header-top-right-top text.data-v-eab21e1e {
+  font-size: 30rpx;
+  color: white;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  opacity: .8;
+}
+.admin .admin-header .admin-header-top .admin-header-top-right .admin-header-top-right-bt.data-v-eab21e1e {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-top .admin-header-top-right .admin-header-top-right-bt text.data-v-eab21e1e {
+  font-size: 25rpx;
+  color: white;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  opacity: .8;
+}
+.admin .admin-header .admin-header-foot.data-v-eab21e1e {
+  width: 94%;
+  height: 40%;
+  border-radius: 15rpx;
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-0.data-v-eab21e1e {
+  width: 20%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-0 .admin-header-foot-0-top.data-v-eab21e1e {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-0 .admin-header-foot-0-top text.data-v-eab21e1e {
+  font-size: 15rpx;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  opacity: .4;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-0 .admin-header-foot-0-bt.data-v-eab21e1e {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-0 .admin-header-foot-0-bt text.data-v-eab21e1e {
+  font-size: 30rpx;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  color: #2979FF;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-1.data-v-eab21e1e {
+  width: 20%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-1 .admin-header-foot-1-top.data-v-eab21e1e {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-1 .admin-header-foot-1-top text.data-v-eab21e1e {
+  font-size: 20rpx;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  opacity: .4;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-1 .admin-header-foot-1-bt.data-v-eab21e1e {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-1 .admin-header-foot-1-bt text.data-v-eab21e1e {
+  font-size: 30rpx;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  color: #2979FF;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-2.data-v-eab21e1e {
+  width: 20%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-2 .admin-header-foot-2-top.data-v-eab21e1e {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-2 .admin-header-foot-2-top text.data-v-eab21e1e {
+  font-size: 20rpx;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  opacity: .4;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-2 .admin-header-foot-2-bt.data-v-eab21e1e {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin .admin-header .admin-header-foot .admin-header-foot-2 .admin-header-foot-2-bt text.data-v-eab21e1e {
+  font-size: 30rpx;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  color: #2979FF;
+}
+.admin .admin-section.data-v-eab21e1e {
+  width: 100%;
+  height: 600rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.admin .admin-section .admin-section.data-v-eab21e1e {
+  width: 100%;
+  height: 15%;
+  border-bottom: 1rpx solid #e4e7ed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.admin .admin-section .admin-section .admin-section-left.data-v-eab21e1e {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.admin .admin-section .admin-section .admin-section-left text.data-v-eab21e1e {
+  font-size: 24rpx;
+  opacity: .5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+.admin .admin-section .admin-section .admin-section-right.data-v-eab21e1e {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.admin .admin-section .admin-section .admin-section-right text.data-v-eab21e1e {
+  font-size: 28rpx;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+

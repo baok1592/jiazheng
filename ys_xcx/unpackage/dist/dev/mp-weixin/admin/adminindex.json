@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "货源广场",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "u-tabs-swiper": "/node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper",
+    "admin": "/components/admin",
+    "tabbar": "/components/tabbar"
+  }
+}

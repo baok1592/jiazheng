@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "货物物流信息",
+  "navigationBarBackgroundColor": "#2979FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
+    "wuliumsg": "/components/wuliumsg"
+  }
+}

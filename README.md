@@ -15,14 +15,11 @@
 + 用户权限管理
 
 
-
 使用手册：[https://www.kancloud.cn/baok1592/rhtra_077/2598233](https://www.kancloud.cn/baok1592/rhtra_077/2598233)
 
+QQ联系：1514945707
 
-演示版cms:[http://demo_traffic.ruhuashop.com/cms/#/](http://demo_traffic.ruhuashop.com/cms/#/)
-
-
-qq群：728615087  
+QQ群：728615087
 
 #### 开源版使用须知
 1. 允许用于个人学习、毕业设计、教学案例、公益事业
